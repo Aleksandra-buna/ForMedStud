@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+
+
+
+{% block content %}
+    <style>
+        .home-container {
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        }
+    </style>
+
+
+    <div class="home-container">
+
+        <div>
+            <h3>Темы</h3>
+            <hr>
+            <div>
+                <a href="{% url 'home' %}">Все</a>
+                {% for topic in topics %}
+                    <div>
+                        <a href="{% url 'home' %}?q={{topic.name}}">{{ topic.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <div>
+            <a href="{% url 'create-room' %}">Создать комнату</a>
+            <h4>Всего комнат: {{count_rooms}}</h4>
+
+            <div>
+                {% for room in rooms %}
+                    <div>
+                        <a href="{% url 'update-room' room.id %}">Редактировать</a>
+                        <a href="{% url 'delete-room' room.id %}">Удалить</a>
+                        <span>@{{room.user.username}}</span>
+                        <h4>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h4>
+                        <small>{{room.topic}}</small>
+                        <hr>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
