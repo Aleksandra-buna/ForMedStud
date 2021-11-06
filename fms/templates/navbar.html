@@ -5,4 +5,8 @@
     <input type="search" name="q" placeholder="Поиск..."/>
 </form>
 
+{% if request.user.is_authenticated %}
+<a href="{% url 'logout' %}">Выход</a>
+{% else %}
 <a href="{% url 'login' %}">Вход/Регистрация</a>
+{% endif %}
