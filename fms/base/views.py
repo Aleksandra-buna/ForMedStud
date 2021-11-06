@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Room, Topic
@@ -48,6 +49,7 @@ def room_page(request, pk):
     return render(request, 'base/room_page.html', context)
 
 
+@login_required(login_url='login')
 def create_room(request):
     form = RoomForm
     if request.method == 'POST':
