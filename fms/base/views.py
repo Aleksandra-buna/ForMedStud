@@ -1,7 +1,27 @@
 from django.db.models import Q
+from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Room, Topic
 from .forms import RoomForm
+
+
+def login_register(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Пользователь или пароль введены не верно!')
+
+    context = {}
+
+    return render(request, 'base/login.html', context)
 
 
 def home(request):
