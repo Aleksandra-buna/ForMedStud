@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .models import Room, Topic
+from .models import Room, Topic, Message
 from .forms import RoomForm
 
 
@@ -65,7 +65,17 @@ def home(request):
 
 def room_page(request, pk):
     room = Room.objects.get(id=pk)
-    context = {'room': room}
+    msgs = room.message_set.all().order_by('-created')
+
+    if request.method == 'POST':
+        create_message = Message.objects.create(
+            user=request.user,
+            room=room,
+            body=request.POST.get('body')
+        )
+        return redirect('room', pk=room.id)
+
+    context = {'room': room, 'msgs': msgs}
 
     return render(request, 'base/room_page.html', context)
 

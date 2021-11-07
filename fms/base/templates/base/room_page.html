@@ -2,4 +2,29 @@
 
 {% block content %}
     <h1>{{room.name}}</h1>
+
+    <p>{{room.description}}</p>
+
+    <div class="comment-wrapper">
+        <h2>Беседа</h2>
+        <hr>
+
+        {% for message in msgs %}
+            <div>
+                <small>@{{message.user}} | {{message.created}}</small>
+                <h4>{{message.body}}</h4>
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if request.user.is_authenticated %}
+    <div class="comment-form">
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="body" placeholder="Введите сообщение..."/>
+        </form>
+    </div>
+    {% endif %}
 {% endblock %}
