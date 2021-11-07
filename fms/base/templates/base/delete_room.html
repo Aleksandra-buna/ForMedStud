@@ -5,7 +5,7 @@
     <div>
         <form action="" method="POST">
             {% csrf_token %}
-            <h4>Вы уверены, что хотите удалить комнату: "{{room}}"?</h4>
+            <h4>Вы уверены, что хотите удалить: "{{obj}}"?</h4>
             <a href="{{ request.META.HTTP_REFERER }}">Назад</a>
             <input type="submit" value="Подтвердить"/>
         </form>

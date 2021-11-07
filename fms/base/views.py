@@ -110,10 +110,24 @@ def update_room(request, pk):
 
 def delete_room(request, pk):
     room = Room.objects.get(id=pk)
-    context = {'room': room}
+
     if request.method == 'POST':
         room.delete()
         return redirect('home')
+
+    context = {'obj': room}
+
+    return render(request, 'base/delete_room.html', context)
+
+
+def delete_message(request, pk):
+    message = Message.objects.get(id=pk)
+
+    if request.method == 'POST':
+        message.delete()
+        return redirect('home')
+
+    context = {'obj': message}
 
     return render(request, 'base/delete_room.html', context)
 # Create your views here.
