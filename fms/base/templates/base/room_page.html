@@ -1,9 +1,19 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>{{room.name}}</h1>
+    <style>
+        .room-container {
+        display: grid;
+        grid-template-columns: 3fr 1fr
+        }
+    </style>
 
-    <p>{{room.description}}</p>
+    <div class="room-container">
+
+        <div>
+            <h1>{{room.name}}</h1>
+
+            <p>{{room.description}}</p>
 
             <div class="comment-wrapper">
                 <h2>Беседа</h2>
