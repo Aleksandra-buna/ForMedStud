@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Room, Topic, Message
@@ -62,6 +63,18 @@ def home(request):
     context = {'rooms': rooms, 'topics': topics, 'count_rooms': count_rooms, 'msgs': msgs}
 
     return render(request, 'base/home.html', context)
+
+
+def user_profile(request, pk):
+    user = User.objects.get(id=pk)
+    # show all user rooms
+    rooms = user.room_set.all()
+    msgs = user.message_set.all()
+    topics = Topic.objects.all()
+
+    context = {'user': user, 'rooms': rooms, 'msgs': msgs, 'topics': topics}
+
+    return render(request, 'base/profile_page.html', context)
 
 
 def room_page(request, pk):

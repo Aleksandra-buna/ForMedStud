@@ -1,0 +1,14 @@
+<h2>Недавняя активность</h2>
+<hr>
+
+{% for message in msgs %}
+    <div>
+        <small>{{message.user}} | {{message.created}}</small>
+        <small><b>{{message.room}}</b></small>
+        <p>{{message}}</p>
+        {% if request.user == message.user %}
+            <a href="{% url 'delete-message' message.id %}">Удалить</a>
+        {% endif %}
+        <hr>
+    </div>
+{% endfor %}

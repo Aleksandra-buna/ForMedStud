@@ -1,0 +1,17 @@
+<h2>Комнаты</h2>
+<h4>Всего комнат: {{count_rooms}}</h4>
+
+<div>
+    {% for room in rooms %}
+        <div>
+            <b><a href="{% url 'profile' room.user.id %}">@{{room.user.username}}</a></b>
+            {% if request.user == room.user %}
+                <a href="{% url 'update-room' room.id %}">Редактировать</a>
+                <a href="{% url 'delete-room' room.id %}">Удалить</a>
+            {% endif %}
+            <h4><a href="{% url 'room' room.id %}">{{room.name}}</a></h4>
+            <small>{{room.topic}}</small>
+            <hr>
+        </div>
+    {% endfor %}
+</div>
