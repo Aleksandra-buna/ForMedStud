@@ -3,7 +3,7 @@
 
 {% for message in msgs %}
     <div>
-        <small>{{message.user}} | {{message.created}}</small>
+        <small><a href="{% url 'profile' message.user.id %}">{{message.user}}</a> | {{message.created}}</small>
         <small><b>{{message.room}}</b></small>
         <p>{{message}}</p>
         {% if request.user == message.user %}
