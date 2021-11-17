@@ -1,17 +1,45 @@
-<h2>Комнаты</h2>
-<h4>Всего комнат: {{count_rooms}}</h4>
+{% load static %}
 
-<div>
-    {% for room in rooms %}
-        <div>
-            <b><a href="{% url 'profile' room.user.id %}">@{{room.user.username}}</a></b>
-            {% if request.user == room.user %}
-                <a href="{% url 'update-room' room.id %}">Редактировать</a>
-                <a href="{% url 'delete-room' room.id %}">Удалить</a>
-            {% endif %}
-            <h4><a href="{% url 'room' room.id %}">{{room.name}}</a></h4>
-            <small>{{room.topic}}</small>
-            <hr>
+{% for room in rooms %}
+<div class="rooms-List">
+    <div class="rooms__header">
+        <a href="{% url 'profile' room.user.id %}" class="rooms__author">
+            <span>{{room.user.username}}</span>
+        </a>
+        <div class="rooms__actions">
+            <span>{{room.created}}</span>
         </div>
-    {% endfor %}
+    </div>
+
+    <div class="rooms__content">
+        <a href="{% url 'room' room.id %}">{{room.name}}</a>
+        <p>{{room.description}}<p>
+    </div>
+
+    <div class="rooms__meta">
+        <a href="{% url 'room' room.id %}" class="rooms__joined">
+            <img src="{% static 'images/participants.svg' %}"/>
+            {{room.participants.all.count}} присоединилось
+        </a>
+        <p class="rooms__topic">{{room.topic.name}}</p>
+    </div>
 </div>
+{% endfor %}
+
+
+<!--<div>-->
+<!--    <h1>Комнаты</h1>-->
+<!--    <p>Количество комнат: {{count_rooms}}</p>-->
+<!--    {% for room in rooms %}-->
+<!--        <div>-->
+<!--            <b><a href="{% url 'profile' room.user.id %}" class="link-dark">@{{room.user.username}}</a></b>-->
+<!--            {% if request.user == room.user %}-->
+<!--                <small><a href="{% url 'update-room' room.id %}">Редактировать</a></small>-->
+<!--                <small><a href="{% url 'delete-room' room.id %}">Удалить</a></small>-->
+<!--            {% endif %}-->
+<!--            <h4><a href="{% url 'room' room.id %}">{{room.name}}</a></h4>-->
+<!--            <small>{{room.topic}}</small>-->
+<!--            <hr>-->
+<!--        </div>-->
+<!--    {% endfor %}-->
+<!--</div>-->
