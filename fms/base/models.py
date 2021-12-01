@@ -27,21 +27,27 @@ def save_user_profile(sender, instance, **kwargs):
 class Topic(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name = 'тема'
+        verbose_name_plural = 'темы'
+
     def __str__(self):
         return self.name
 
 
 class Room(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.TextField()
-    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    participants = models.ManyToManyField(User, related_name='participants', blank=True)
+    name = models.CharField(max_length=200, verbose_name='название')
+    description = models.TextField(verbose_name='описание')
+    topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True, verbose_name='тема')
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name='пользователь')
+    participants = models.ManyToManyField(User, related_name='participants', blank=True, verbose_name='участники')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-updated', '-created']
+        verbose_name = 'комната'
+        verbose_name_plural = 'комнаты'
 
     def __str__(self):
         return self.name
@@ -56,6 +62,8 @@ class Message(models.Model):
 
     class Meta:
         ordering = ['-updated', '-created']
+        verbose_name = 'сообщение'
+        verbose_name_plural = 'сообщения'
 
     def __str__(self):
         return self.body[:50]
