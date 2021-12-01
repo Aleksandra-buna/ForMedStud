@@ -1,12 +1,12 @@
+from django.db import transaction
 from django.db.models import Q
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import Room, Topic, Message
-from .forms import RoomForm
+from .models import Room, Topic, Message, Profile
+from .forms import RoomForm, UserForm, MyUserCreationForm, ProfileForm
 
 
 def login_page(request):
@@ -34,9 +34,10 @@ def logout_event(request):
 
 
 def register_page(request):
-    form = UserCreationForm
+    form = MyUserCreationForm()
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = MyUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -44,7 +45,7 @@ def register_page(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'Пароли не совпадают, попробуйте снова')
+            messages.error(request, 'Данные введены некорректно, пожалуйста попробуйте снова.')
 
     context = {'form': form}
 
@@ -75,6 +76,27 @@ def user_profile(request, pk):
     context = {'user': user, 'rooms': rooms, 'msgs': msgs, 'topics': topics}
 
     return render(request, 'base/profile_page.html', context)
+
+
+@login_required(login_url='login')
+@transaction.atomic
+def update_user(request):
+    user_form = UserForm(instance=request.user)
+    profile_form = ProfileForm(instance=request.user.profile)
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, 'Ваш профиль успешно обновлен!')
+            return redirect('profile', pk=request.user.id)
+        else:
+            messages.error(request, 'Некорректный ввод!')
+
+    context = {'user_form': user_form, 'profile_form': profile_form}
+
+    return render(request, 'base/update_profile.html', context)
 
 
 def room_page(request, pk):

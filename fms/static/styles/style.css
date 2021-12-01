@@ -1,53 +1,183 @@
 
+
+/*==============================
+=>  Home Layout
+================================*/
+
+section{
+  padding: 0 15px;
+}
+
+@media (min-width: 575.98px){
+  section {
+    padding: 0 calc(50% - 270px);
+  }
+}
+
+@media (min-width: 767.98px){
+  section {
+    padding: 0 calc(50% - 360px);
+  }
+}
+
+@media (min-width: 991.98px) {
+  section {
+    padding: 0 calc(50% - 480px);
+  }
+}
+
+@media (min-width: 1199.98px){
+  section {
+    padding: 0 calc(50% - 690px);
+  }
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    align-items: stretch;
+    margin-right: 3.2rem;
+    margin-top: 2.2rem;
+
+}
+
 /*==============================
 =>  Layout
 ================================*/
-.layout {
-    margin-top: 2.2rem;
-    margin-right: 3.2rem;
+
+.create__box {
+    width: 100%;
+    max-width: 50rem;
+    max-height: 38rem;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    background-color: #639ece;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 6px 3px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
 }
 
+.create__header {
+    display: flex;
+    padding: 1.5rem;
+    background-color: #a6dffc;
 
-@media (min-width: 690px)
-.container, .container-lg, .container-md, .container-sm {
-    max-width: 1080px;
 }
 
-.layout > .container {
-    display: grid;
-    grid-template-columns: 1.2fr 3.4fr 1.3fr;
-    align-items: baseline;
+.create__header h3 {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #8d0089;
+}
 
+.create__body {
+    margin: 3rem;
+    overflow-y: auto;
+}
+
+.create__body a {
+    color: #8d0089;
+}
+
+.form__group {
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.form__group label {
+    display: block;
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #27438c;
+}
+
+.form__group input,
+.form__group textarea {
+    background: #639ece;
+    border: 2px solid #8d0089;
+    padding: 0.5rem;
+    border-radius: 3px;
+    width: 100%;
+    color: #a6dffc;
+    font-weight: 500;
+    outline: none;
+}
+
+.form__group input:focus,
+.form__group textarea:focus{
+    border-color: #27438c;
+}
+
+textarea::placeholder {
+    color: #a6dffc;
+}
+
+.form__action {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3rem;
+}
+
+.button {
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all ease-in-out 0.3s;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    font-weight: 500;
+}
+
+.btn--cancel {
+    background-color: #72a5cc;
+    color: #27438c;
+    text-decoration: none;
+
+}
+
+.btn--main {
+    background-color: #a6dffc;
+    color: #8d0089;
 }
 
 /*==============================
-=>  Topics
+=>  Topic Block
 ================================*/
 
-.topics {
+.topics__header {
     color: #8d0089;
-    margin-right: 2.2rem;
+    margin-bottom: 2rem;
 }
 
-topics__list {
-    list-style: none;
+.topics ul {
+    padding-left: 0.2rem;
 }
 
-.topics__list li a {
+.topics ul li {
+    list-style-type: none;
+}
+
+
+.topics ul li a {
     display: flex;
     justify-content: space-between;
     margin-bottom: 3rem;
+    margin-right: 2rem;
     font-weight: 500;
     color: #27438c;
     transition: all 0.3s ease-in-out;
 }
 
-.topics__list li a.active,
-.topics__list li a:hover {
+.topics li a.active,
+.topics li a:hover {
     color: #8d0089;
 }
 
-.topics__list li a span {
+.topics li a span {
     padding: 0.2rem 0.4rem;
     background-color: #639ece;
     border-radius: 3px;
@@ -59,15 +189,19 @@ topics__list {
 
 
 /*==============================
-=>  Rooms
+=>  Room Block
 ================================*/
 
 .rooms {
-    margin-left: 5.2rem;
+    margin-left: 4.8rem;
 }
 
 .rooms h1 {
     color: #8d0089;
+}
+
+.rooms h4 {
+    color: #27438c;
 }
 
 .rooms-List {
@@ -84,12 +218,9 @@ topics__list {
 }
 
 .rooms__author {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     color: #a6dffc;
     text-decoration: none;
-    border: solid;
-    border-radius: 0.3rem;
-    border-color: #a6dffc;
 }
 
 .rooms__author:hover {
@@ -124,9 +255,6 @@ topics__list {
     color: #27438c;
 }
 
-.room_content p {
-
-}
 
 .rooms__meta {
     border-top: 1px solid #27438c;
@@ -150,9 +278,10 @@ topics__list {
     color: #8d0089;
 }
 
-.rooms__joined img {
-    width: 2rem;
-    height: 2rem;
+.rooms__actions svg {
+    fill: #8d0089;
+    width: 1.6rem;
+    height: 1.6rem;
 }
 
 .rooms__topic {
@@ -164,14 +293,512 @@ topics__list {
     font-size: 1.1rem;
 }
 
+/*==============================
+=>  Room
+================================*/
+.room,
+.participants {
+    background: #639ece;
+    border-radius: 0.7rem;
+    overflow: hidden;
+}
+
+.room {
+    width: 100%;
+    max-width: 60rem;
+    max-height: 37rem;
+    position: absolute;
+    top: 17%;
+}
+
+.participants {
+    width: 100%;
+    max-width: 20rem;
+    max-height: 37rem;
+    position: absolute;
+    top: 17%;
+    left: 75%;
+}
+
+.room__top,
+.participants__top {
+    background: #a6dffc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem;
+}
+
+.room__back {
+    display: flex;
+    gap: 1rem;
+}
+
+.room__back svg {
+    width: 1.3rem;
+    height: 1.6rem;
+    fill:  #8d0089;
+}
+
+.room__back h3,
+.participants__top {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #27438c;
+    font-size: 1.2rem;
+}
+
+.room__delete {
+    display: flex;
+    column-gap: 1em;
+}
+
+.room__delete svg {
+    fill: #8d0089;
+}
+
+.room__box {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 80.5vh;
+  padding-bottom: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .room__box {
+    padding-left: 4rem;
+    padding-right: 4rem;
+    height: 80.5vh;
+    overflow-y: auto;
+    padding-bottom: 0;
+  }
+}
+
+.room__header {
+    max-height: 12rem;
+    overflow-y: auto;
+    position: absolute;
+    width: 95%;
+    background: #a6dffc;
+    z-index: 999;
+    top: 5rem;
+    left: 1.5rem;
+    padding: 1rem 1rem;
+    border-radius: 0.2rem;
+}
+
+.room__header p {
+    font-weight: 400;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 1rem;
+    background-color: #27438c;
+}
+
+.room__user {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+}
+
+.room__topics {
+    padding: 4px 1rem;
+    background: #27438c;
+    color: #a6dffc;
+    display: inline-block;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+}
+
+.room__author {
+    font-size: 1.2rem;
+    transition: all 0.3s ease-in-out;
+    color: #27438c;
+    text-decoration: none;
+    font-weight: 500;
+
+}
+
+.room__author:hover {
+    text-decoration: none;
+    color: #8d0089;
+}
+
+.room__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room__info h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #8d0089;
+}
+
+.room__info span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #27438c;
+}
+
+.room_talk {
+    margin-top: 13rem;
+    height: 50%;
+}
+
+.scrolling_info h3 {
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #8d0089;
+}
+
+.scrolling_info {
+    overflow-y: auto;
+    height: 100%;
+    margin-top: 32vh;
+    padding: 0 2rem 4rem 2rem;
+    }
+
+.talk {
+    border-left: 2px solid #8d0089;
+    padding-left: 1rem;
+    margin: 2rem 1rem;
+    padding: 1rem;
+}
+
+.talk__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.talk__author {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.talk__author a {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    color: #a6dffc;
+    font-size: 1rem;
+}
+
+.talk__author a:hover {
+    text-decoration: none;
+    font-weight: 500;
+    color: #27438c;
+}
+
+.talk__date {
+    font-size: 1rem;
+    color: #27438c;
+    font-weight: 500;
+}
+
+.talk__delete svg {
+    fill: #8d0089;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.talk__details {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    }
+
+.room__message {
+  position: absolute;
+  z-index: 111;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: transparent;
+}
+
+.room__message > form > input {
+  resize: none;
+  background-color: #8d0089;
+  color: #a6dffc;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  height: 3rem;
+  width: 100%;
+  margin-top: -1rem;
+  padding: 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.room__message > form > input::placeholder {
+  color: #a6dffc;
+  font-size: 1.4rem;
+}
+
+.participants__top span {
+  color: #8d0089;
+  font-size: 0.8rem;
+  text-transform: none;
+}
+
+.participants__top {
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.participants__list {
+  padding: 2rem;
+  height: 82.5vh;
+  overflow-y: scroll;
+  padding-bottom: 0;
+}
+
+.participant {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-decoration: none;
+}
+
+.participant p {
+  color: #8d0089;
+  line-height: 1.2;
+}
+
+.participant span {
+  display: block;
+  font-weight: 500;
+  color: #a6dffc;
+  font-weight: 1.4rem;
+}
 
 /*==============================
-=>  Activity
+=>  Activity Block
 ================================*/
 
-.activity {
-    margin-left: 5.2rem;
+.activities {
+    background: #639ece;
+    border-radius: 1rem;
+    overflow: hidden;
+    position:relative;
+    left: 27%;
+    }
+
+.activities__header h2 {
+    background-color: #a6dffc;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 1rem 1.5rem;
+    color: #27438c;
+    letter-spacing: 1px;
+    font-size: 1.4rem;
+}
+
+.activities-List {
+    margin: 1.3rem;
+    padding: 1.3rem;
+    border: 2px solid #8d0089;
+    border-radius: 1rem;
+}
+
+.activities__author {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.activities__author a {
+    color: #a6dffc;
+    text-decoration: none;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.activities__author a:hover {
+    color: #27438c;
+}
+
+.activities__author p {
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.3;
+
+}
+
+.activities__author p span {
+    color: #27438c;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.activities__actions svg {
+    fill: #8d0089;
 }
 
 
+.activities__content {
+    font-size: 1rem;
+    color: #27438c;
+}
+
+.activities__content a{
+    font-size: 1rem;
+    color: #8d0089;
+}
+
+.activities__content a:hover {
+    text-decoration: underline;
+    color: #27438c;
+}
+
+.activities__roomBody {
+    background: #a6dffc;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-left: 0.2rem;
+    font-size: 0.8rem;
+}
+
+/*==============================
+=>  Avatar
+================================*/
+
+.avatar {
+    position: relative;
+    bottom: 15%;
+    display: inline-block;
+
+}
+
+.avatar.avatar--small img {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    border: 2px solid #a6dffc;
+
+}
+
+avatar.avatar--medium img {
+    width: 5rem;
+    height: 4rem;
+    border-radius: 50%;
+}
+
+/*==============================
+=>  Profile
+================================*/
+
+.profile {
+    margin-bottom: 3rem;
+}
+
+.profile__avatar {
+    text-align: center;
+}
+
+.avatar.avatar--large img {
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    border: 2px solid #27438c;
+}
+
+.profile__info {
+    text-align: center;
+}
+
+.profile__info h3 {
+    font-size: 2rem;
+    color: #27438c;
+    font-weight: 400;
+}
+
+.profile__info p {
+    color: #8d0089;
+    font-weight: 500;
+    margin-bottom: 8rem;
+    font-size: 1rem;
+}
+
+.profile__about {
+    margin-top: 4rem;
+    border: 2px solid #8d0089;
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.profile__about h3 {
+    text-transform: uppercase;
+    color: #8d0089;
+    margin-bottom: 0.5rem;
+}
+
+
+.avatar.avatar--large img {
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.profile__header {
+    color: #27438c;
+}
+
+/*==============================
+=>  Delete
+================================*/
+
+.delete-room.create__body form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end
+}
+
+.delete-room.create__body > form > h4 {
+    color: #27438c;
+}
+
+.delete-room.create__body > form > h4 > span {
+    color: #8d0089;
+    text-decoration: underline;
+}
+
+/*==============================
+=>  Login/Register
+================================*/
+
+.login__body {
+    margin: 3rem;
+}
+
+.login__body a {
+    color: #8d0089;
+}
+
+.login-page.create__box {
+ width: 40%;
+}
+
+.update.create__box {
+    overflow-y: auto;
+    border-radius: 0.3rem;
+}
 

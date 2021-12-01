@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="update create__box scroll">
+    <div class="create__header">
+        <h3>Редактировать профиль</h3>
+    </div>
+
+
+    <div class="create__body">
+        <form class="form" action="" method="POST">
+            {% csrf_token %}
+
+            {% for field in user_form %}
+            <div class="form__group">
+                <label>{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+
+            {% for field in profile_form %}
+            <div class="form__group">
+                <label>{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+
+            <div class="form__action">
+                <a class="button btn--cancel" href="{{request.META.HTTP_REFERER}}">Отмена</a>
+                <button class="button btn--main" type="submit">Готово</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
