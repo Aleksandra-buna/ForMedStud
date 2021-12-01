@@ -132,20 +132,7 @@ def create_room(request):
     return render(request, 'base/create_room.html', context)
 
 
-def update_room(request, pk):
-    room = Room.objects.get(id=pk)
-    form = RoomForm(instance=room)
-    if request.method == 'POST':
-        form = RoomForm(request.POST, instance=room)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-
-    context = {'form': form}
-
-    return render(request, 'base/create_room.html', context)
-
-
+@login_required(login_url='login')
 def delete_room(request, pk):
     room = Room.objects.get(id=pk)
 
@@ -158,14 +145,11 @@ def delete_room(request, pk):
     return render(request, 'base/delete_room.html', context)
 
 
+@login_required(login_url='login')
 def delete_message(request, pk):
-    message = Message.objects.get(id=pk)
+    message = get_object_or_404(Message, id=pk)
+    message.delete()
 
-    if request.method == 'POST':
-        message.delete()
-        return redirect('home')
+    return redirect(request.META['HTTP_REFERER'])
 
-    context = {'obj': message}
-
-    return render(request, 'base/delete_room.html', context)
 # Create your views here.
